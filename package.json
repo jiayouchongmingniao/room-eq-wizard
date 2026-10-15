@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "electron": "electron .",
-    "dist:win": "electron-builder --win portable nsis --x64",
-    "dist:mac": "electron-builder --mac dir dmg"
+    "dist:win": "electron-builder --win portable nsis --x64 --publish never",
+    "dist:mac": "electron-builder --mac dir dmg --publish never"
   },
   "build": {
     "appId": "com.roomeqwizard.rewpro",
