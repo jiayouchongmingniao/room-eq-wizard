@@ -1,0 +1,683 @@
+/* Room EQ Wizard (REW V5.40) - Desktop Application Styles */
+:root {
+  --bg-app: #181a1f;
+  --bg-toolbar: #21252b;
+  --bg-sidebar: #1c1f26;
+  --bg-panel: #14171c;
+  --bg-card: #252932;
+  --bg-card-active: #2d3340;
+  --border-col: #2f3542;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --accent-green: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-red: #ef4444;
+}
+
+body.light-theme {
+  --bg-app: #f1f5f9;
+  --bg-toolbar: #e2e8f0;
+  --bg-sidebar: #f8fafc;
+  --bg-panel: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-active: #e0f2fe;
+  --border-col: #cbd5e1;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-app);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Roboto, sans-serif;
+  font-size: 12.5px;
+}
+
+.rew-app-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 1. Top Menu Strip */
+.rew-menubar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  padding: 0 12px;
+  background: var(--bg-app);
+  border-bottom: 1px solid var(--border-col);
+  font-size: 12px;
+}
+
+.rew-menu-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rew-brand {
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rew-menu-item {
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.rew-menu-item:hover {
+  color: var(--text-main);
+  background: rgba(255,255,255,0.06);
+}
+
+.rew-menu-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 11.5px;
+}
+
+/* 2. Main Icon Action Toolbar (1:1 REW Top Toolbar) */
+.rew-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 54px;
+  padding: 0 10px;
+  background: var(--bg-toolbar);
+  border-bottom: 1px solid var(--border-col);
+  gap: 6px;
+}
+
+.rew-tool-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rew-tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  height: 44px;
+  padding: 4px 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-col);
+  border-radius: 5px;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  gap: 2px;
+}
+
+.rew-tool-btn:hover {
+  border-color: var(--accent-blue);
+  background: var(--bg-card-active);
+}
+
+.rew-tool-btn.measure-cta {
+  background: linear-gradient(180deg, rgba(239,68,68,0.22), rgba(185,28,28,0.28));
+  border-color: rgba(239,68,68,0.65);
+}
+.rew-tool-btn.measure-cta:hover {
+  background: linear-gradient(180deg, rgba(239,68,68,0.35), rgba(185,28,28,0.42));
+}
+
+.rew-tool-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.rew-tool-label {
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border-col);
+  margin: 0 4px;
+}
+
+/* 3. Workspace Body (Left Measurements Sidebar + Right Graph Viewport) */
+.rew-workspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.rew-sidebar {
+  width: 275px;
+  min-width: 245px;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-col);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-col);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.badge {
+  background: var(--accent-blue);
+  color: #fff;
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
+.measurement-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.meas-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-col);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 5px;
+  padding: 7px 9px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.meas-card:hover {
+  background: var(--bg-card-active);
+}
+
+.meas-card.active {
+  background: var(--bg-card-active);
+  box-shadow: 0 0 0 1px var(--accent-blue);
+}
+
+.meas-card-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.meas-vis-check {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.meas-title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meas-del-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0 3px;
+  line-height: 1;
+}
+.meas-del-btn:hover {
+  color: var(--accent-red);
+}
+
+.meas-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.meas-notes {
+  margin-top: 4px;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-footer {
+  padding: 8px;
+  border-top: 1px solid var(--border-col);
+  display: flex;
+  gap: 6px;
+}
+
+/* 4. Right Main Analysis Area */
+.rew-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--bg-panel);
+}
+
+/* Graph Tab Bar + Graph Controls Bar */
+.rew-tabbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-toolbar);
+  border-bottom: 1px solid var(--border-col);
+  padding: 4px 8px 0 8px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rew-tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  overflow-x: auto;
+}
+
+.rew-tab-btn {
+  padding: 6px 11px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-col);
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.1s;
+}
+
+.rew-tab-btn:hover {
+  color: var(--text-main);
+}
+
+.rew-tab-btn.active {
+  background: var(--bg-panel);
+  color: #38bdf8;
+  font-weight: 600;
+  border-top: 2px solid #38bdf8;
+}
+
+.rew-graph-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 4px;
+}
+
+.ctrl-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.rew-select, .rew-input {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-col);
+  border-radius: 4px;
+  padding: 3px 7px;
+  font-size: 11.5px;
+}
+
+.rew-btn {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-col);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.rew-btn:hover {
+  border-color: var(--accent-blue);
+}
+.rew-btn.primary-btn {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #fff;
+  font-weight: 600;
+}
+.rew-btn.danger-btn {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  color: #fff;
+  font-weight: 600;
+}
+.rew-btn.sm {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+/* Canvas Viewport */
+.rew-canvas-wrap {
+  flex: 1;
+  position: relative;
+  min-height: 260px;
+}
+
+#main-graph-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+/* Bottom Trace Legend & Tab Data Dock */
+.rew-bottom-dock {
+  background: var(--bg-toolbar);
+  border-top: 1px solid var(--border-col);
+}
+
+.trace-legend-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 6px 12px;
+  min-height: 36px;
+}
+
+.legend-active-meas {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 8px;
+  border-right: 1px solid var(--border-col);
+  font-size: 12px;
+}
+
+.trace-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.swatch {
+  width: 11px;
+  height: 3px;
+  border-radius: 1px;
+  display: inline-block;
+}
+
+.seg-group {
+  display: inline-flex;
+  border: 1px solid var(--border-col);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.seg-btn {
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border: none;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.seg-btn.active {
+  background: var(--accent-blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+.inline-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.rew-range {
+  width: 85px;
+  accent-color: var(--accent-blue);
+}
+
+/* Tab Detail Data Table (RT60 / PEQ bands) */
+.tab-detail-pane {
+  border-top: 1px solid var(--border-col);
+  background: var(--bg-sidebar);
+  max-height: 155px;
+  overflow-y: auto;
+  padding: 6px 12px;
+}
+
+.rew-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+.rew-data-table th, .rew-data-table td {
+  padding: 4px 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-col);
+}
+.rew-data-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+  background: rgba(0,0,0,0.15);
+}
+.highlight-val {
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* PEQ Filter Cards Strip */
+.peq-grid-strip {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(115px, 1fr));
+  gap: 6px;
+}
+
+.peq-band-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-col);
+  border-radius: 4px;
+  padding: 5px 7px;
+  font-size: 11px;
+}
+.peq-band-card.on {
+  border-color: rgba(245, 158, 11, 0.55);
+}
+.peq-band-card.off {
+  opacity: 0.55;
+}
+.peq-band-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.peq-mini-select {
+  background: var(--bg-panel);
+  color: var(--text-main);
+  border: 1px solid var(--border-col);
+  border-radius: 3px;
+  font-size: 10.5px;
+}
+.peq-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+}
+.peq-row input {
+  width: 56px;
+  background: var(--bg-panel);
+  color: var(--text-main);
+  border: 1px solid var(--border-col);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 11px;
+  text-align: right;
+}
+
+/* Modals */
+.rew-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.rew-modal-backdrop.hidden {
+  display: none;
+}
+
+.rew-modal {
+  width: 520px;
+  max-width: 94vw;
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-col);
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+
+.rew-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-toolbar);
+  border-bottom: 1px solid var(--border-col);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.rew-modal-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.progress-bar-outer {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-panel);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-col);
+}
+.progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  transition: width 0.15s ease;
+}
+
+.rew-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-toolbar);
+  border-top: 1px solid var(--border-col);
+}
+
+/* SPL Meter Big Display */
+.spl-digital-box {
+  background: #0b0e12;
+  border: 1px solid #2a3241;
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.spl-big-num {
+  font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+  font-size: 42px;
+  font-weight: 700;
+  color: #10b981;
+}
+.spl-sub-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Toast Notification */
+.rew-toast {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  background: #1e293b;
+  color: #f8fafc;
+  border-left: 4px solid #38bdf8;
+  padding: 9px 14px;
+  border-radius: 5px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: all 0.2s ease;
+  z-index: 2000;
+}
+.rew-toast.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

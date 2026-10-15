@@ -1,0 +1,63 @@
+{
+  "name": "room-eq-wizard-pro",
+  "version": "5.40.0",
+  "description": "1:1 Desktop Clone of Room EQ Wizard (REW V5.40) - Room Acoustics Measurement, Analysis & Equalization Software (Windows & macOS)",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js",
+    "electron": "electron .",
+    "dist:win": "electron-builder --win portable nsis --x64",
+    "dist:mac": "electron-builder --mac dir dmg"
+  },
+  "build": {
+    "appId": "com.roomeqwizard.rewpro",
+    "productName": "Room EQ Wizard V5.40",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "server.js",
+      "public/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "Room-EQ-Wizard-v${version}-Portable-x64.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "Room-EQ-Wizard-v${version}-Setup-x64.${ext}"
+    },
+    "mac": {
+      "category": "public.app-category.music",
+      "target": [
+        "dir",
+        "dmg"
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "author": "Room EQ Wizard Community",
+  "license": "MIT"
+}

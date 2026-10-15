@@ -1,0 +1,66 @@
+name: Build Windows EXE & Release
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    name: Build Windows Portable & Setup EXE
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Windows EXE (Portable & Installer)
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npm run dist:win
+
+      - name: List built EXE files
+        shell: pwsh
+        run: Get-ChildItem -Path dist -Filter *.exe | Select-Object Name, Length
+
+      - name: Upload Windows EXE to Actions Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Room-EQ-Wizard-Windows-EXE
+          path: |
+            dist/*.exe
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish / Update GitHub Release with Downloadable EXE
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v5.40.0-latest
+          name: "Room EQ Wizard (REW V5.40) Windows 桌面版 (.exe)"
+          body: |
+            ### 🎧 Room EQ Wizard (REW V5.40) Windows 桌面版自动构建发布
+            
+            提供两个可直接下载运行的 Windows 64 位版本：
+            - **`Room-EQ-Wizard-v5.40.0-Portable-x64.exe`**：绿色免安装单文件便携版（下载后双击直接运行）
+            - **`Room-EQ-Wizard-v5.40.0-Setup-x64.exe`**：标准 Windows 安装包版本（支持自定义安装路径与创建桌面快捷方式）
+          files: |
+            dist/*.exe
+          prerelease: false
+          make_latest: "true"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
